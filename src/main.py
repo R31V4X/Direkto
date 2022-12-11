@@ -30,7 +30,17 @@ notebook.add(tab2, text="File Management")
 notebook.add(tab3, text="Settings")
 
 
+# Menu 
 
+menu = Menu(root)
+
+def help():
+    pass
+
+menu.add_command(label="Help", command=help)
+menu.add_command(label="Exit", command=root.destroy)
+
+root.config(menu=menu)
 #Tab1
 
 #   Add sequence of directories
@@ -42,6 +52,14 @@ notebook.add(tab3, text="Settings")
 
 add_seq_dir_frame = LabelFrame(tab1, text="Add Sequence of Directories", width=100, height=100)
 add_seq_dir_frame.pack()
+
+
+
+
+# Settings tab3
+
+
+
 
 
 root.mainloop()
