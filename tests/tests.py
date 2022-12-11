@@ -1,7 +1,8 @@
-import tkinter as tk
+from tkinter import *
 from tkinter import filedialog
+
 # Setup
-root = tk.Tk()
+root = Tk()
 
 WIN_WIDTH, WIN_HEIGHT = 1000, 800
 
@@ -14,9 +15,10 @@ root.resizable(False, False)
 def btn():
     filename = filedialog.askdirectory()
 
-    Labe
+    Label(root, text=str(filename)).pack()
 
 
-btn = tk.Button(root, text="Browse", command=btn) 
+btn = Button(root, text="Browse", command=btn) 
+btn.pack()
 
 root.mainloop()
