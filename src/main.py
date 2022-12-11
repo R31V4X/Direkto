@@ -37,10 +37,15 @@ menu = Menu(root)
 def help():
     pass
 
-menu.add_command(label="Help", command=help)
+help_menu = Menu(menu, tearoff=0)
+help_menu.add_command(label="How to use Direkto")
+help_menu.add_command(label="Troubleshooting")
+menu.add_cascade(label="Help", menu=help_menu)
 menu.add_command(label="Exit", command=root.destroy)
 
 root.config(menu=menu)
+
+
 #Tab1
 
 #   Add sequence of directories
@@ -50,14 +55,23 @@ root.config(menu=menu)
 #
 
 
-add_seq_dir_frame = LabelFrame(tab1, text="Add Sequence of Directories", width=100, height=100)
-add_seq_dir_frame.pack()
+add_seq_dir_frame = LabelFrame(tab1, text="Add Sequence of Directories", width=200, height=200)
+add_seq_dir_frame.grid(column=0, row=0, padx=20, pady=20)
 
 
 
 
 # Settings tab3
 
+general_frame = LabelFrame(tab3, text="General")
+customize_graph_frame = LabelFrame(tab3, text="Customize Appearance")
+
+
+win_dim_label = Label(general_frame, text="Change windows dimension : ")
+
+
+general_frame.pack(pady=15)
+customize_graph_frame.pack(pady=15)
 
 
 
