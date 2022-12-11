@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.ttk import *
 from settings import *
+from tkinter.colorchooser import askcolor
 
 # Setup
 root = Tk()
@@ -14,7 +15,7 @@ root.iconbitmap("ressources/direkto_logo.ico")
 
 
 # Tabs
-notebook = Notebook(root)
+notebook = Notebook(root, width=WIN_WIDTH-50, height=WIN_HEIGHT-50)
 notebook.pack(pady=25)
 
 
@@ -78,31 +79,61 @@ customize_app_frame.grid(column=0, row=1, padx=15, pady=15)
 # General : Change dimension
 win_dim_label = Label(general_frame, text="Change Window Dimension : ")
 
-win_dim_combobox = Combobox(general_frame, values=window_size_options)
+win_dim_combobox = Combobox(general_frame, values=window_size_options, state=NORMAL)
 win_dim_combobox.set("1000 x 800")
 
-
 def apply_win_dim():
+    global WIN_HEIGHT
+    global WIN_WIDTH
+    # Fullscreen
+    if fullscreen_bool.get() == 1:
+
+        WIN_WIDTH = int(root.winfo_screenwidth())
+        WIN_HEIGHT = int(root.winfo_screenheight())
+
+        root.geometry(f"{WIN_WIDTH}x{WIN_HEIGHT}+0+0")
+        win_dim_combobox.config(state=DISABLED)
+
+    elif fullscreen_bool.get() == 0:
+        root.attributes("-fullscreen", False)
+        win_dim_combobox.config(state=NORMAL)
+
+    # Dimension
     dim = win_dim_combobox.get()
-    if dim in window_size_options:
+    if dim in window_size_options and fullscreen_bool.get() == 0:
         splitted_dim = dim.split(" ")
 
-        width = int(splitted_dim[0])
-        height = int(splitted_dim[2])
+        WIN_WIDTH = int(splitted_dim[0])
+        WIN_HEIGHT = int(splitted_dim[2])
 
-        root.geometry(f"{width}x{height}+{int((root.winfo_screenwidth()/2)-(width/2))}+{int((root.winfo_screenheight()/2)-(height/2))}")
+        root.geometry(f"{WIN_WIDTH}x{WIN_HEIGHT}+{int((root.winfo_screenwidth()/2)-(WIN_WIDTH/2))}+{int((root.winfo_screenheight()/2)-(WIN_HEIGHT/2))}")
     else:
         pass
+    notebook.config(width=WIN_WIDTH-50, height=WIN_HEIGHT-50)
 win_dim_apply = Button(general_frame, text="Apply", command=apply_win_dim)
 
+fullscreen_label = Label(general_frame, text="Fullscreen")
 
-win_dim_label.grid(column=0, row=0, padx=10, pady=10)
-win_dim_combobox.grid(column=1, row=0, padx=10, pady=10)
-win_dim_apply.grid(column=0, row=1, columnspan=2, pady=5)
-
-
+fullscreen_bool = IntVar()
+fullscreen_checkbox = Checkbutton(general_frame, variable=fullscreen_bool)
 
 
+fullscreen_label.grid(column=0, row=0, padx=10, pady=10)
+fullscreen_checkbox.grid(column=1, row=0, padx=10, pady=10)
+win_dim_label.grid(column=0, row=1, padx=10, pady=10)
+win_dim_combobox.grid(column=1, row=1, padx=10, pady=10)
+win_dim_apply.grid(column=0, row=2, columnspan=2, pady=5)
+
+
+# Appearance
+bg_color_label = Label(customize_app_frame, text="Background color : ")
+
+def changecolor():
+    pass
+bg_color_btn = Button(customize_app_frame, text="Select a color", command=changecolor)
+
+
+bg_color_label.grid(column=0, row=0, padx=10, pady=10)
 
 
 root.mainloop()
