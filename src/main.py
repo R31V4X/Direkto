@@ -1,14 +1,16 @@
 from tkinter import *
 from tkinter.ttk import *
+from settings import *
 
 # Setup
 root = Tk()
 
 WIN_WIDTH, WIN_HEIGHT = 1000, 800
 
-root.geometry(F"{WIN_WIDTH}x{WIN_HEIGHT}+{int((root.winfo_screenwidth()/2)-(WIN_WIDTH/2))}+{int((root.winfo_screenheight()/2)-(WIN_HEIGHT/2))}")
+root.geometry(f"{WIN_WIDTH}x{WIN_HEIGHT}+{int((root.winfo_screenwidth()/2)-(WIN_WIDTH/2))}+{int((root.winfo_screenheight()/2)-(WIN_HEIGHT/2))}")
 root.title("DIREKTO")
 root.resizable(False, False)
+root.iconbitmap("ressources/direkto_logo.ico")
 
 
 # Tabs
@@ -47,13 +49,12 @@ root.config(menu=menu)
 
 
 #Tab1
-
-#   Add sequence of directories
 #
-#
+#   
 #
 #
 
+# Add sequence of directories
 
 add_seq_dir_frame = LabelFrame(tab1, text="Add Sequence of Directories", width=200, height=200)
 add_seq_dir_frame.grid(column=0, row=0, padx=20, pady=20)
@@ -62,16 +63,44 @@ add_seq_dir_frame.grid(column=0, row=0, padx=20, pady=20)
 
 
 # Settings tab3
+#
+#
+#
 
+
+# Frames
 general_frame = LabelFrame(tab3, text="General")
-customize_graph_frame = LabelFrame(tab3, text="Customize Appearance")
+customize_app_frame = LabelFrame(tab3, text="Customize Appearance")
+
+general_frame.grid(column=0, row=0, padx=15, pady=15)
+customize_app_frame.grid(column=0, row=1, padx=15, pady=15)
+
+# General : Change dimension
+win_dim_label = Label(general_frame, text="Change Window Dimension : ")
+
+win_dim_combobox = Combobox(general_frame, values=window_size_options)
+win_dim_combobox.set("1000 x 800")
 
 
-win_dim_label = Label(general_frame, text="Change windows dimension : ")
+def apply_win_dim():
+    dim = win_dim_combobox.get()
+    if dim in window_size_options:
+        splitted_dim = dim.split(" ")
+
+        width = int(splitted_dim[0])
+        height = int(splitted_dim[2])
+
+        root.geometry(f"{width}x{height}+{int((root.winfo_screenwidth()/2)-(width/2))}+{int((root.winfo_screenheight()/2)-(height/2))}")
+    else:
+        pass
+win_dim_apply = Button(general_frame, text="Apply", command=apply_win_dim)
 
 
-general_frame.pack(pady=15)
-customize_graph_frame.pack(pady=15)
+win_dim_label.grid(column=0, row=0, padx=10, pady=10)
+win_dim_combobox.grid(column=1, row=0, padx=10, pady=10)
+win_dim_apply.grid(column=0, row=1, columnspan=2, pady=5)
+
+
 
 
 
