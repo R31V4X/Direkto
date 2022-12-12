@@ -8,5 +8,17 @@ def convert_pseudo_to_name(pseudo: str, iterator: str, i_value: str):
     return name
 
 
+# Create folders 
+
+def create_folder_with_i():
+    pass
+
+def create_folder_without_i():
+    pass
+
+def create_folder():
+    pass
+
+
 
 

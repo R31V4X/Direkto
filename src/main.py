@@ -51,12 +51,12 @@ menu.add_command(label="Exit", command=root.destroy)
 
 root.config(menu=menu)
 
-
+##################
 #Tab1
 #
 #   
 #
-#
+#####################
 
 # Add sequence of directories
 # frame
@@ -79,7 +79,39 @@ parent_folder1_browse = Button(add_seq_dir_frame, text="Browse", command=parent_
 
 i_bool = IntVar()
 def change_i_bool():
-    pass
+    if i_bool.get() == 0:
+        name_folder_with_i_label.config(state=DISABLED)
+        name_folder_with_i_entry.config(state=DISABLED)
+        iterator_char_label.config(state=DISABLED)
+        iterator_char_entry.config(state=DISABLED)
+        start_num_label.config(state=DISABLED)
+        start_num_spin.config(state=DISABLED)
+        end_num_label.config(state=DISABLED)
+        end_num_spin.config(state=DISABLED)
+        incrementation_num_label.config(state=DISABLED)
+        incrementation_num_spin.config(state=DISABLED)
+
+        num_folder_label.config(state=NORMAL)
+        num_folder_spin.config(state=NORMAL)
+        name_folder_without_i_label.config(state=NORMAL)
+        name_folder_without_i_entry.config(state=NORMAL)
+
+    elif i_bool.get() == 1:
+        name_folder_with_i_label.config(state=NORMAL)
+        name_folder_with_i_entry.config(state=NORMAL)
+        iterator_char_label.config(state=NORMAL)
+        iterator_char_entry.config(state=NORMAL)
+        start_num_label.config(state=NORMAL)
+        start_num_spin.config(state=NORMAL)
+        end_num_label.config(state=NORMAL)
+        end_num_spin.config(state=NORMAL)
+        incrementation_num_label.config(state=NORMAL)
+        incrementation_num_spin.config(state=NORMAL)
+
+        num_folder_label.config(state=DISABLED)
+        num_folder_spin.config(state=DISABLED)
+        name_folder_without_i_label.config(state=DISABLED)
+        name_folder_without_i_entry.config(state=DISABLED)
 without_i_radio = Radiobutton(add_seq_dir_frame, text="Without iterator", variable=i_bool, value=0, command=change_i_bool)
 with_i_radio = Radiobutton(add_seq_dir_frame, text="With iterator", variable=i_bool, value=1, command=change_i_bool)
 
@@ -104,23 +136,43 @@ num_folder_spin.grid(column=1, row=1, padx=5, pady=5)
 with_i_radio.grid(column=0, row=3, pady=10)
 # With i frame
 with_i_frame.grid(column=0, columnspan=2, row=4, padx=10, pady=10)
-name_folder_with_i_label = Label(with_i_frame, text="Pseudo-name of folder to create : ", state=NORMAL)
-name_folder_with_i_entry = Entry(with_i_frame, state=NORMAL)
-iterator_char_label = Label(with_i_frame, text="Iterator character : ", state=NORMAL)
-iterator_char_entry = Entry(with_i_frame, state=NORMAL, width=1)
+name_folder_with_i_label = Label(with_i_frame, text="Pseudo-name of folder to create : ", state=DISABLED)
+name_folder_with_i_entry = Entry(with_i_frame, state=DISABLED)
+iterator_char_label = Label(with_i_frame, text="Iterator character : ", state=DISABLED)
+iterator_char_entry = Entry(with_i_frame, state=DISABLED, width=1)
+start_num_label = Label(with_i_frame, state=DISABLED, text="Start value : ")
+start_num_spin = Spinbox(with_i_frame, state=DISABLED, width=10)
+end_num_label = Label(with_i_frame, state=DISABLED, text="End value : ")
+end_num_spin = Spinbox(with_i_frame, state=DISABLED, width=10)
+incrementation_num_label = Label(with_i_frame, state=DISABLED, text="Incrementation (Ex : -1, +2) : ")
+incrementation_num_spin = Entry(with_i_frame, state=DISABLED, width=10)
 
 
 name_folder_with_i_label.grid(column=0, row=0, padx=5, pady=5)
 name_folder_with_i_entry.grid(column=1, row=0, padx=5, pady=5)
 iterator_char_label.grid(column=3, row=0, padx=10, pady=5)
 iterator_char_entry.grid(column=4, row=0, padx=5, pady=5)
+start_num_label.grid(column=0, row=2, padx=3, pady=5, sticky=W)
+start_num_spin.grid(column=0, row=2, pady=5, sticky=E)
+end_num_label.grid(column=0, row=3, padx=3, pady=5, sticky=W)
+end_num_spin.grid(column=0, row=3, pady=5, sticky=E)
+incrementation_num_label.grid(column=0, row=4, padx=3, pady=5, sticky=W)
+incrementation_num_spin.grid(column=1, row=4, pady=5, sticky=W)
+
+# Apply
+apply_seq_folder = Button(add_seq_dir_frame, text="Create folders", command=create_folder, width=20)
+
+apply_seq_folder.grid(column=0, columnspan=4, row=5, pady=20)
 
 
 
+
+
+############################
 # Settings tab3
 #
 #
-#
+########################
 
 
 # Frames
