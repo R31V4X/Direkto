@@ -1,7 +1,10 @@
 from tkinter import *
 from tkinter.ttk import *
 from settings import *
+from dir_functions import *
 from tkinter.colorchooser import askcolor
+from tkinter.filedialog import askdirectory
+import os
 
 # Setup
 root = Tk()
@@ -28,7 +31,7 @@ tab2.pack()
 tab3 = Frame(notebook, width=WIN_WIDTH-50, height=WIN_HEIGHT-50)
 tab3.pack()
 
-notebook.add(tab1, text="Directory Management")
+notebook.add(tab1, text="Folder Management")
 notebook.add(tab2, text="File Management")
 notebook.add(tab3, text="Settings")
 
@@ -55,13 +58,62 @@ root.config(menu=menu)
 #
 #
 
-# Add sequence of directo0ries
+# Add sequence of directories
+# frame
+add_seq_dir_frame = LabelFrame(tab1, text="Add Sequence of Folders")
+add_seq_dir_frame.grid(column=0, row=0, padx=15, pady=15, ipadx=10)
 
-# Frames
-add_seq_dir_frame = LabelFrame(tab1, text="Add Sequence of Directories", width=200, height=200)
-add_seq_dir_frame.grid(column=0, row=0, padx=15, pady=15)
+with_i_frame = LabelFrame(add_seq_dir_frame, text="With iterator")
+without_i_frame = LabelFrame(add_seq_dir_frame, text="Without iterator")
+
+# Widget
+parent_folder1_label = Label(add_seq_dir_frame, text="Parent folder : ")
+parent_folder1_entry = Entry(add_seq_dir_frame, width=38)
+
+def parent_folder1_search():
+    path = askdirectory()
+    parent_folder1_entry.delete(0, END)
+    parent_folder1_entry.insert(END, str(path))
+
+parent_folder1_browse = Button(add_seq_dir_frame, text="Browse", command=parent_folder1_search)
+
+i_bool = IntVar()
+def change_i_bool():
+    pass
+without_i_radio = Radiobutton(add_seq_dir_frame, text="Without iterator", variable=i_bool, value=0, command=change_i_bool)
+with_i_radio = Radiobutton(add_seq_dir_frame, text="With iterator", variable=i_bool, value=1, command=change_i_bool)
 
 
+parent_folder1_label.grid(column=0, row=0, padx=10, pady=10)
+parent_folder1_entry.grid(column=1, row=0, padx=10, pady=10)
+parent_folder1_browse.grid(column=2, row=0, pady=10)
+
+without_i_radio.grid(column=0, row=1, padx=10, pady=10)
+# Without i frame
+without_i_frame.grid(column=0, columnspan=2, row=2, padx=10, pady=10)
+num_folder_label = Label(without_i_frame, text="Number of folders to create : ", state=NORMAL)
+num_folder_spin = Spinbox(without_i_frame, from_=0, to=99, state=NORMAL )
+name_folder_without_i_label = Label(without_i_frame, text="Name of folder to create : ", state=NORMAL)
+name_folder_without_i_entry = Entry(without_i_frame, state=NORMAL)
+
+name_folder_without_i_label.grid(column=0, row=0, padx=5, pady=5)
+name_folder_without_i_entry.grid(column=1, row=0, padx=5, pady=5)
+num_folder_label.grid(column=0, row=1, padx=5, pady=5)
+num_folder_spin.grid(column=1, row=1, padx=5, pady=5)
+
+with_i_radio.grid(column=0, row=3, pady=10)
+# With i frame
+with_i_frame.grid(column=0, columnspan=2, row=4, padx=10, pady=10)
+name_folder_with_i_label = Label(with_i_frame, text="Pseudo-name of folder to create : ", state=NORMAL)
+name_folder_with_i_entry = Entry(with_i_frame, state=NORMAL)
+iterator_char_label = Label(with_i_frame, text="Iterator character : ", state=NORMAL)
+iterator_char_entry = Entry(with_i_frame, state=NORMAL, width=1)
+
+
+name_folder_with_i_label.grid(column=0, row=0, padx=5, pady=5)
+name_folder_with_i_entry.grid(column=1, row=0, padx=5, pady=5)
+iterator_char_label.grid(column=3, row=0, padx=10, pady=5)
+iterator_char_entry.grid(column=4, row=0, padx=5, pady=5)
 
 
 
