@@ -55,10 +55,12 @@ root.config(menu=menu)
 #
 #
 
-# Add sequence of directories
+# Add sequence of directo0ries
 
+# Frames
 add_seq_dir_frame = LabelFrame(tab1, text="Add Sequence of Directories", width=200, height=200)
-add_seq_dir_frame.grid(column=0, row=0, padx=20, pady=20)
+add_seq_dir_frame.grid(column=0, row=0, padx=15, pady=15)
+
 
 
 
@@ -70,8 +72,10 @@ add_seq_dir_frame.grid(column=0, row=0, padx=20, pady=20)
 
 
 # Frames
-general_frame = LabelFrame(tab3, text="General")
+general_frame = LabelFrame(tab3, text="General", width=365, height=100)
 customize_app_frame = LabelFrame(tab3, text="Customize Appearance")
+#general_frame.grid_propagate(0)
+#customize_app_frame.grid_propagate(0)
 
 general_frame.grid(column=0, row=0, padx=15, pady=15)
 customize_app_frame.grid(column=0, row=1, padx=15, pady=15)
@@ -126,14 +130,19 @@ win_dim_apply.grid(column=0, row=2, columnspan=2, pady=5)
 
 
 # Appearance
-bg_color_label = Label(customize_app_frame, text="Background color : ")
+#bg_color_label = Label(customize_app_frame, text="Background color : ")
 
-def changecolor():
-    pass
-bg_color_btn = Button(customize_app_frame, text="Select a color", command=changecolor)
+#def changecolor():
+#    color = askcolor(title="Color Picker")
+#bg_color_btn = Button(customize_app_frame, text="Select a color", command=changecolor)
 
 
-bg_color_label.grid(column=0, row=0, padx=10, pady=10)
+#bg_color_label.grid(column=0, row=0, padx=10, pady=10)
+#bg_color_btn.grid(column=1, row=0, padx=10, pady=10, ipadx=3, ipady=2)
+
+
+
+
 
 
 root.mainloop()
