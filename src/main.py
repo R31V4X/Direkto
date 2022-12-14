@@ -159,9 +159,49 @@ end_num_spin.grid(column=0, row=3, pady=5, sticky=E)
 incrementation_num_label.grid(column=0, row=4, padx=3, pady=5, sticky=W)
 incrementation_num_spin.grid(column=1, row=4, pady=5, sticky=W)
 
+
+
+# Create folders functions
+
+def verify_field_filled(radio_option):
+    if radio_option == 0:
+        if len(name_folder_without_i_entry.get()) != 0 and len(num_folder_spin.get()) != 0:
+            return True
+        else:
+            return False
+    elif radio_option == 1:
+        if len(name_folder_with_i_entry.get()) != 0 and len(iterator_char_entry.get()) != 0 and len(start_num_spin.get()) != 0 and len(end_num_spin.get()) != 0 and len(incrementation_num_spin.get()) != 0:
+            return True
+        else:
+            return False
+    else:
+        return "Error"
+
+def error_box(error_message: str):
+    pass
+
+def success_box(success_message: str):
+    pass
+
+def create_folder_with_i():
+    pass
+
+def create_folder_without_i():
+    pass
+
+
+
+def create_folder():
+    print(verify_field_filled(i_bool.get()))
+    if i_bool == 0:
+        create_folder_without_i()
+    elif i_bool == 1:
+        create_folder_with_i()
+    else:
+        error_box("Error")
+    success_box("Folders created with success!")
 # Apply
 apply_seq_folder = Button(add_seq_dir_frame, text="Create folders", command=create_folder, width=20)
-
 apply_seq_folder.grid(column=0, columnspan=4, row=5, pady=20)
 
 
