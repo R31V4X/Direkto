@@ -4,7 +4,7 @@ from settings import *
 from dir_functions import *
 from tkinter.colorchooser import askcolor
 from tkinter.filedialog import askdirectory
-from tkinter.messagebox import showerror
+from tkinter.messagebox import showerror, showinfo
 import os
 
 # Setup
@@ -179,24 +179,43 @@ def verify_field_filled(radio_option):
         return "Error"
 
 
-def create_folder_with_i():
-    pass
+
 
 def create_folder_without_i():
-    pass
+    # Verify if spin is number
+    try:
+        int(num_folder_spin.get())
+    except ValueError:
+        showerror("VALUE ERROR", "This entry has an invalid value : Number of folders to create\n\nMake sure to pick an integer larger than 0")
+        return
+
+    if int(num_folder_spin.get()) < 1:
+        showerror("VALUE ERROR", "This entry has an invalid value : Number of folders to create\n\nMake sure to pick a number larger than 0")
+        return
+    else:
+
+    
+        showinfo("SUCCESS", "Folders created with success!")
+
+
+def create_folder_with_i():
+    showinfo("SUCCESS", "Folders created with success!")
+
 
 
 
 def create_folder():
+    global i_bool
     if verify_field_filled(i_bool.get()) == False:
         showerror("Field missing!", "Make sure to fill all the required fields!")
-    if i_bool == 0:
+        return
+    if i_bool.get() == 0:
         create_folder_without_i()
-    elif i_bool == 1:
+    elif i_bool.get() == 1:
         create_folder_with_i()
+        showinfo("SUCCESS", "Folders created with success!")
     else:
-        error_box("Error")
-    success_box("Folders created with success!")
+        showerror("ERROR", "Error : Can't find option selected")
 # Apply
 apply_seq_folder = Button(add_seq_dir_frame, text="Create folders", command=create_folder, width=20)
 apply_seq_folder.grid(column=0, columnspan=4, row=5, pady=20)
