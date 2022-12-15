@@ -4,6 +4,7 @@ from settings import *
 from dir_functions import *
 from tkinter.colorchooser import askcolor
 from tkinter.filedialog import askdirectory
+from tkinter.messagebox import showerror
 import os
 
 # Setup
@@ -177,11 +178,6 @@ def verify_field_filled(radio_option):
     else:
         return "Error"
 
-def error_box(error_message: str):
-    pass
-
-def success_box(success_message: str):
-    pass
 
 def create_folder_with_i():
     pass
@@ -192,7 +188,8 @@ def create_folder_without_i():
 
 
 def create_folder():
-    print(verify_field_filled(i_bool.get()))
+    if verify_field_filled(i_bool.get()) == False:
+        showerror("Field missing!", "Make sure to fill all the required fields!")
     if i_bool == 0:
         create_folder_without_i()
     elif i_bool == 1:
