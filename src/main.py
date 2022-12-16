@@ -149,19 +149,17 @@ incrementation_num_spin.grid(column=1, row=4, pady=5, sticky=W)
 
 def verify_field_filled(radio_option):
     if radio_option == 0:
-        if len(name_folder_without_i_entry.get()) != 0 and len(num_folder_spin.get()) != 0:
+        if len(name_folder_without_i_entry.get()) != 0 and len(num_folder_spin.get()) != 0 and len(parent_folder1_entry.get()) != 0:
             return True
         else:
             return False
     elif radio_option == 1:
-        if len(name_folder_with_i_entry.get()) != 0 and len(iterator_char_entry.get()) != 0 and len(start_num_spin.get()) != 0 and len(end_num_spin.get()) != 0 and len(incrementation_num_spin.get()) != 0:
+        if len(name_folder_with_i_entry.get()) != 0 and len(iterator_char_entry.get()) != 0 and len(start_num_spin.get()) != 0 and len(end_num_spin.get()) != 0 and len(incrementation_num_spin.get()) != 0 and len(parent_folder1_entry.get()) != 0:
             return True
         else:
             return False
     else:
         return "Error"
-
-
 
 
 def create_folder_without_i():
@@ -176,15 +174,17 @@ def create_folder_without_i():
         showerror("VALUE ERROR", "This entry has an invalid value : Number of folders to create\n\nMake sure to pick a number larger than 0")
         return
     else:
-        
-    
-        showinfo("SUCCESS", "Folders created with success!")
+        if os.path.exists(parent_folder1_entry.get()):
+            for i in range(num_folder_spin.get()):
+                #path = os.path.join()
+                pass
+            showinfo("SUCCESS", "Folders created with success!")
+        else:
+            showerror("VALUE ERROR", "This entry has an invalid value : Number of folders to create\n\nMake sure to pick a number larger than 0")
 
 
 def create_folder_with_i():
     showinfo("SUCCESS", "Folders created with success!")
-
-
 
 
 def create_folder():
