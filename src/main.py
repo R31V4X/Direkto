@@ -78,41 +78,24 @@ def parent_folder1_search():
 
 parent_folder1_browse = Button(add_seq_dir_frame, text="Browse", command=parent_folder1_search)
 
+
+def disable_widgets(children):
+    for child in children:
+        child.config(state=DISABLED)
+
+def enable_widgets(children):
+    for child in children:
+        child.config(state=NORMAL)
+
 i_bool = IntVar()
 def change_i_bool():
     if i_bool.get() == 0:
-        name_folder_with_i_label.config(state=DISABLED)
-        name_folder_with_i_entry.config(state=DISABLED)
-        iterator_char_label.config(state=DISABLED)
-        iterator_char_entry.config(state=DISABLED)
-        start_num_label.config(state=DISABLED)
-        start_num_spin.config(state=DISABLED)
-        end_num_label.config(state=DISABLED)
-        end_num_spin.config(state=DISABLED)
-        incrementation_num_label.config(state=DISABLED)
-        incrementation_num_spin.config(state=DISABLED)
-
-        num_folder_label.config(state=NORMAL)
-        num_folder_spin.config(state=NORMAL)
-        name_folder_without_i_label.config(state=NORMAL)
-        name_folder_without_i_entry.config(state=NORMAL)
-
+        enable_widgets(without_i_frame.winfo_children())
+        disable_widgets(with_i_frame.winfo_children())
     elif i_bool.get() == 1:
-        name_folder_with_i_label.config(state=NORMAL)
-        name_folder_with_i_entry.config(state=NORMAL)
-        iterator_char_label.config(state=NORMAL)
-        iterator_char_entry.config(state=NORMAL)
-        start_num_label.config(state=NORMAL)
-        start_num_spin.config(state=NORMAL)
-        end_num_label.config(state=NORMAL)
-        end_num_spin.config(state=NORMAL)
-        incrementation_num_label.config(state=NORMAL)
-        incrementation_num_spin.config(state=NORMAL)
+        enable_widgets(with_i_frame.winfo_children())
+        disable_widgets(without_i_frame.winfo_children())
 
-        num_folder_label.config(state=DISABLED)
-        num_folder_spin.config(state=DISABLED)
-        name_folder_without_i_label.config(state=DISABLED)
-        name_folder_without_i_entry.config(state=DISABLED)
 without_i_radio = Radiobutton(add_seq_dir_frame, text="Without iterator", variable=i_bool, value=0, command=change_i_bool)
 with_i_radio = Radiobutton(add_seq_dir_frame, text="With iterator", variable=i_bool, value=1, command=change_i_bool)
 
@@ -193,7 +176,7 @@ def create_folder_without_i():
         showerror("VALUE ERROR", "This entry has an invalid value : Number of folders to create\n\nMake sure to pick a number larger than 0")
         return
     else:
-
+        
     
         showinfo("SUCCESS", "Folders created with success!")
 
